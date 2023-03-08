@@ -1,10 +1,8 @@
-import React from 'react'
-import * as S from './styles'
+import React from 'react';
+import * as S from './styles';
 
 const Podcast = () => {
-  return (
-    <S.Container>Podcast</S.Container>
-  )
-}
+    return <S.Container>Podcast</S.Container>;
+};
 
-export default Podcast
+export default Podcast;
