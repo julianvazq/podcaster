@@ -34,9 +34,10 @@ const useFetch = ({ url, lsKey }) => {
         try {
             const stringifiedData = localStorage.getItem(lsKey);
             const item = JSON.parse(stringifiedData);
+            if (item == null) return null;
             const itemHasExpired =
                 new Date(item.expiresAt).getTime() < new Date().getTime();
-            if (item == null || itemHasExpired) return null;
+            if (itemHasExpired) return null;
             return item.data || null;
         } catch (error) {
             console.log(error);
