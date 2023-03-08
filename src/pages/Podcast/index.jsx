@@ -1,8 +1,9 @@
 import React from 'react'
+import * as S from './styles'
 
 const Podcast = () => {
   return (
-    <div>Podcast</div>
+    <S.Container>Podcast</S.Container>
   )
 }
 

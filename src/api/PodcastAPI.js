@@ -1,11 +1,7 @@
-const getTopPodcasts = async ({ limit, genre }) => {
-    const res = await fetch(
-        `https://itunes.apple.com/us/rss/toppodcasts/limit=${limit}/genre=${genre}/json`
-    );
-    const data = await res.json();
-    return data?.feed?.entry;
+const getTopPodcastsUrl = ({ limit, genre }) => {
+    return `https://itunes.apple.com/us/rss/toppodcasts/limit=${limit}/genre=${genre}/json`;
 };
 
 export const PodcastAPI = {
-    getTopPodcastEntries: getTopPodcasts,
+    getTopPodcastsUrl,
 };

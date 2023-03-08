@@ -1,19 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { PodcastAPI } from '../../api/PodcastAPI';
+import { LS_KEYS } from '../../constants';
+import useFetch from '../../hooks/useFetch';
+import PodcastList from './PodcastList';
 
 const Home = () => {
-
-  useEffect(() => {
-    PodcastAPI.getTopPodcastEntries({limit: 100, genre: 1310}).then(data => {
-      console.log('data', data);
-    }).catch(error => {
-        console.log('Error: ', error);
-    })
-  }, [])
+    const {data: podcasts} = useFetch({url: PodcastAPI.getTopPodcastsUrl({limit: 100, genre: 1310}), lsKey: LS_KEYS.TopPodcasts })
 
   return (
-    <div>Home</div>
+    <PodcastList podcasts={podcasts?.feed?.entry || []} />
   )
 }
 
-export default Home
+export default Home;
