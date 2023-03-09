@@ -4,7 +4,7 @@
 
 ## Requisitos
 
-- Instalar [NodeJS](https://nodejs.org/en/) para poder seguir los siguientes pasos
+- Instalar [NodeJS](https://nodejs.org/en/) para poder seguir los siguientes pasos.
 
 ## Instalación
 
