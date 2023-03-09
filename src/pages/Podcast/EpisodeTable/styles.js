@@ -12,12 +12,16 @@ export const Table = styled.table`
 
 export const Row = styled.tr`
     border-bottom: 1px solid lightgray;
-    &:nth-child(even) {
+    &:nth-child(odd) {
         background-color: #f9f9f9;
     }
 `;
 
-export const THead = styled.thead``;
+export const THead = styled.thead`
+    & > ${Row} {
+        background-color: transparent;
+    }
+`;
 
 export const TBody = styled.tbody``;
 

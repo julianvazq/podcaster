@@ -84,10 +84,10 @@ const Podcast = () => {
     }, [data]);
 
     useEffect(() => {
-        const getAdditionalPodastData = async (feedUrl) => {
+        const getDescriptionAndEpisodes = async (feedUrl) => {
             const document = await getRSSFeedDocument(feedUrl);
             const description =
-                document.querySelector('description').firstChild.wholeText;
+                document.querySelector('description')?.firstChild?.wholeText;
             setDescription(description);
             const episodeElements = document.querySelectorAll('item');
             const episodes = extractEpisodesData(episodeElements);
@@ -96,7 +96,7 @@ const Podcast = () => {
 
         if (podcast?.feedUrl) {
             setLoading(true);
-            getAdditionalPodastData(podcast.feedUrl)
+            getDescriptionAndEpisodes(podcast.feedUrl)
                 .catch((error) => console.log('Error: ', error))
                 .finally(() => setLoading(false));
         }
