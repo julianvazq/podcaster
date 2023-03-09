@@ -18,16 +18,20 @@
 
 ## Development
 
-Ejecutar el siguiente comando para iniciar el servidor local en modo **_development_**:
+1. Ejecutar el siguiente comando para iniciar el servidor local en modo **_development_**:
 
-`npm run dev`
+    `npm run dev`
+
+2. Navegar a [http://127.0.0.1:5173](http://127.0.0.1:5173) en un browser.
 
 ## Production
 
-Ejecutar el siguiente comando para crear el **_production_** build:
+1. Ejecutar el siguiente comando para crear el **_production_** build:
 
-`npm run build`
+    `npm run build`
 
-Seguido por el siguiente comando para iniciar el servidor local en modo **_production_**:
+2. Ejecutar el siguiente comando para iniciar el servidor local en modo **_production_**:
 
-`npm run preview`
+    `npm run preview`
+    
+3. Navegar a [http://127.0.0.1:4173](http://127.0.0.1:4173) en un browser.
