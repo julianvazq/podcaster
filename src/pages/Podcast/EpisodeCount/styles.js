@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { BoxShadowCSS, ContainerPadding } from '../../../styles';
+import { BoxShadowCSS, ContainerPaddingCSS } from '../../../styles';
 
 export const Count = styled.div`
     ${BoxShadowCSS}
-    ${ContainerPadding}
+    ${ContainerPaddingCSS}
     font-weight: 700;
 `;

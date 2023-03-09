@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { BoxShadowCSS, ContainerPadding } from '../../../styles';
+import { BoxShadowCSS, ContainerPaddingCSS } from '../../../styles';
 
 export const PodcastCard = styled.article`
     ${BoxShadowCSS}
-    ${ContainerPadding}
+    ${ContainerPaddingCSS}
     & > section + section {
         border-top: 1px solid lightgray;
         padding-top: 1rem;

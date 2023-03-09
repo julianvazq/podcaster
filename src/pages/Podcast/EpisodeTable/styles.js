@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { BoxShadowCSS, ContainerPadding } from '../../../styles';
+import { BoxShadowCSS, ContainerPaddingCSS } from '../../../styles';
 
 export const TableContainer = styled.div`
     ${BoxShadowCSS}
-    ${ContainerPadding}
+    ${ContainerPaddingCSS}
 `;
 export const Table = styled.table`
     border-collapse: collapse;
@@ -27,6 +27,7 @@ export const Header = styled.th`
 `;
 
 export const Cell = styled.td`
+    text-align: ${(props) => props.textAlign || 'left'};
     padding: 0.5rem;
     &:first-of-type {
         width: 100%;

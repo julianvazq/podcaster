@@ -7,8 +7,6 @@ const PodcastList = ({ podcasts }) => {
         return <p>No podcasts found.</p>;
     }
 
-    console.log('podcasts', podcasts);
-
     return (
         <S.PodcastList>
             {podcasts.map((p) => {

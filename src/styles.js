@@ -5,6 +5,6 @@ export const BoxShadowCSS = css`
         rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 `;
 
-export const ContainerPadding = css`
+export const ContainerPaddingCSS = css`
     padding: 1rem;
 `;

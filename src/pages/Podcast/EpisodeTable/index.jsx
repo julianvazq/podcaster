@@ -23,7 +23,7 @@ const EpisodeTable = ({ episodes }) => {
                             <S.Cell>
                                 {new Date(e.date).toLocaleDateString('en-GB')}
                             </S.Cell>
-                            <S.Cell>{e.duration}</S.Cell>
+                            <S.Cell textAlign='right'>{e.duration}</S.Cell>
                         </S.Row>
                     ))}
                 </S.TBody>
