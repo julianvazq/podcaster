@@ -23,12 +23,12 @@ const Podcast = () => {
     const [description, setDescription] = useState(null);
     const [episodes, setEpisodes] = useState([]);
 
-    console.log('data', data);
-
     const podcast = useMemo(() => {
-        const parsed = parseJSON(data?.contents);
-        const results = parsed?.results?.[0];
-        return results || null;
+        const contents = data?.contents;
+        if (!contents) return null;
+        const parsed = parseJSON(contents);
+        const podcastData = parsed?.results?.[0];
+        return podcastData || null;
     }, [data]);
 
     useEffect(() => {
@@ -37,11 +37,10 @@ const Podcast = () => {
                 console.log('podcast.feedUrl', podcast.feedUrl);
                 const url = PodcastAPI.getAllOriginsUrl(podcast.feedUrl);
                 const res = await fetch(url);
-                const resAsText = await res.text();
-                console.log('resAsText', resAsText);
+                const json = await res.json();
                 const parser = new DOMParser();
                 const document = await parser.parseFromString(
-                    resAsText,
+                    json.contents,
                     'application/xhtml+xml'
                 );
                 console.log('feed', document);
@@ -56,6 +55,8 @@ const Podcast = () => {
                         e.getElementsByTagName('itunes:duration')[0];
                     return {
                         title: e.querySelector('title').firstChild.nodeValue,
+                        description:
+                            e.querySelector('description').firstChild.nodeValue,
                         duration:
                             durationEle?.firstChild.nodeValue ||
                             durationEle?.nodeValue,
