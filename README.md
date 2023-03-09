@@ -2,6 +2,10 @@
 
 **IMPORTANTE**: noto que los requests para obtener los episodios a través de [AllOrigins](https://allorigins.win/) son bastante lentos, por lo cual recomiendo testear con un podcast que tenga pocos episodios (e.j. Norah Jones Is Playing Along).
 
+## Requisitos
+
+- Instalar [NodeJS](https://nodejs.org/en/) para poder seguir los siguientes pasos
+
 ## Instalación
 
 1. Ejecutar el siguiente comando para clonar el projecto.
