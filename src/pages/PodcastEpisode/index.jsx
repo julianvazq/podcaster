@@ -12,7 +12,7 @@ const PodcastEpisode = () => {
     useEffect(() => {
         setLoading(true);
         return () => setLoading(false);
-    }, []);
+    }, [setLoading]);
 
     if (episode == null) {
         return <p>Episode not found.</p>;
