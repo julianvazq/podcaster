@@ -10,7 +10,7 @@
 
 2. Ejecutar el siguiente comando para instalar dependencies.
 
-`npm install`
+    `npm install`
 
 ## Development
 
