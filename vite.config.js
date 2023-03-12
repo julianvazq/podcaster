@@ -4,5 +4,10 @@ import eslint from 'vite-plugin-eslint';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [react({ fastRefresh: true }), eslint()],
+    plugins: [react(), eslint()],
+    test: {
+        globals: true,
+        environment: 'jsdom',
+        setupFiles: './src/tests/setup.js',
+    },
 });
