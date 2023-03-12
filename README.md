@@ -4,7 +4,7 @@
 
 ## Requisitos
 
-- Instalar [NodeJS](https://nodejs.org/en/) para poder seguir los siguientes pasos.
+-   Instalar [NodeJS](https://nodejs.org/en/) para poder seguir los siguientes pasos.
 
 ## Instalación
 
@@ -33,5 +33,13 @@
 2. Ejecutar el siguiente comando para iniciar el servidor local en modo **_production_**:
 
     `npm run preview`
-    
+
 3. Navegar a [http://127.0.0.1:4173](http://127.0.0.1:4173) en un browser.
+
+## Testing
+
+Agregué algunos tests para demostrar un poco más de conocimientos, aunque no es parte de las instrucciones oficiales.
+
+Ejecutar el siguiente comando para correr los tests:
+
+`npm run test`
