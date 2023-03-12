@@ -3,8 +3,7 @@ const getTopPodcastsUrl = ({ limit, genre }) => {
 };
 
 const getPodcastDetailUrl = (podcastId) => {
-    const url = `https://itunes.apple.com/lookup?id=${podcastId}`;
-    return getAllOriginsUrl(url);
+    return `https://itunes.apple.com/lookup?id=${podcastId}`;
 };
 
 export const getAllOriginsUrl = (url) => {

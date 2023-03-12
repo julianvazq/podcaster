@@ -1,69 +1,72 @@
 import { useEffect, useState } from 'react';
+import { PodcastAPI } from '../api/PodcastAPI';
 import { useLoading } from '../contexts/LoadingContext';
+import { parseJSON } from '../utils';
+import useLocalStorage from './useLocalStorage';
 
-const useFetch = ({ url, lsKey }) => {
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
+export const STATUS = {
+    Idle: 'Idle',
+    Error: 'Error',
+    Fetching: 'Fetching',
+    Success: 'Success',
+};
+
+const useFetch = ({ url, lsKey, allOrigins = false, parseJson = true }) => {
     const { setLoading } = useLoading();
+    const [lsData, setLsData] = useLocalStorage({ key: lsKey });
+    const [data, setData] = useState(null);
+    const [status, setStatus] = useState(STATUS.Idle);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchData = async (url) => {
             try {
                 setLoading(true);
-                let data = null;
-                const lsData = getLocalStorage(lsKey);
-                if (lsData != null) {
-                    data = lsData;
-                } else {
-                    const res = await fetch(url);
-                    data = await res.json();
-                    setLocalStorage(lsKey, data);
-                }
+                setStatus(STATUS.Fetching);
+                const res = await fetch(url);
+                const json = await res.json();
+                const data = allOrigins
+                    ? parseAllowOriginsContents(json, parseJson)
+                    : json;
+                setLsData(data);
                 setData(data);
+                setStatus(STATUS.Success);
             } catch (error) {
-                setError(error);
+                setStatus(STATUS.Error);
                 console.log('Error: ', error);
             } finally {
                 setLoading(false);
             }
         };
-        fetchData();
-    }, [url, lsKey, setLoading]);
 
-    const getLocalStorage = (lsKey) => {
-        try {
-            const stringifiedData = localStorage.getItem(lsKey);
-            const item = JSON.parse(stringifiedData);
-            if (item == null) return null;
-            const itemHasExpired =
-                new Date(item.expiresAt).getTime() < new Date().getTime();
-            if (itemHasExpired) return null;
-            return item.data || null;
-        } catch (error) {
-            console.log(error);
-            console.log(`Failed to get LocalStorage data for key: ${lsKey}`);
-            return null;
+        if (lsData) {
+            setStatus(STATUS.Success);
+            return;
         }
-    };
 
-    const setLocalStorage = (lsKey, data) => {
-        try {
-            const dateNow = new Date();
-            const dateIn24Hours = new Date(
-                dateNow.setHours(dateNow.getHours() + 24)
-            );
-            const stringifiedData = JSON.stringify({
-                data,
-                expiresAt: dateIn24Hours,
-            });
-            localStorage.setItem(lsKey, stringifiedData);
-        } catch (error) {
-            console.log(error);
-            console.log(`Failed to set LocalStorage data for key: ${lsKey}`);
+        if (url && data == null && status !== STATUS.Fetching) {
+            const finalUrl = allOrigins
+                ? PodcastAPI.getAllOriginsUrl(url)
+                : url;
+            fetchData(finalUrl);
         }
-    };
 
-    return { data, error };
+        return () => setLoading(false);
+    }, [url, lsKey, allOrigins, parseJson, lsData, setLsData, setLoading]);
+
+    return { data: data || lsData, status };
+};
+
+const parseAllowOriginsContents = (rawData, parseJson) => {
+    const contents = rawData?.contents;
+    if (!contents) return null;
+    let data = null;
+    if (parseJson) {
+        const parsed = parseJSON(contents);
+        data = parsed?.results?.[0] || null;
+    } else {
+        data = contents;
+    }
+    return data;
 };
 
 export default useFetch;
