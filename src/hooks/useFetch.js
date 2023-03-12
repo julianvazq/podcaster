@@ -51,7 +51,17 @@ const useFetch = ({ url, lsKey, allOrigins = false, parseJson = true }) => {
         }
 
         return () => setLoading(false);
-    }, [url, lsKey, allOrigins, parseJson, lsData, setLsData, setLoading]);
+    }, [
+        url,
+        lsKey,
+        allOrigins,
+        parseJson,
+        lsData,
+        setLsData,
+        data,
+        status,
+        setLoading,
+    ]);
 
     return { data: data || lsData, status };
 };
